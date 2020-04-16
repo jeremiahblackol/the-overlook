@@ -1,5 +1,7 @@
 import chai from 'chai';
-const expect = chai.expect;
+import { expect } from 'chai';
+import Customer from '../src/customer';
+import Hotel from '../src/hotel';
 
 describe('See if the tests are running', function() {
   it('should return true', function() {
