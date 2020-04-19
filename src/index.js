@@ -8,7 +8,11 @@ import $ from 'jquery';
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+import './images/turing-logo.png';
+
+import Hotel from '../src/hotel.js';
+
+console.log(Hotel)
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
@@ -16,19 +20,28 @@ let usersPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/use
 let roomsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms').then(response => response.json());
 let bookingsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings').then(response => response.json());
 
-let hotel = {};
+var data = {};
+let hotel;
 
 
 $( window ).on( "load", function() {
   Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
-    hotel = {
+    data = {
       usersData: response[0],
       roomsData: response[1],
       bookingsData: response[2]
     }
-    console.log(hotel)
+  }).then(() => { 
+    createNewHotel(data.usersData, data.roomsData, data.bookingsData)
   });
-});
+})
+
+function createNewHotel(users, rooms, bookings) {
+  hotel = new Hotel(users, rooms, bookings);
+  console.log(hotel)
+}
+
+
 
 
 
