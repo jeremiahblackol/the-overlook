@@ -12,9 +12,6 @@ import './images/turing-logo.png';
 
 import Hotel from '../src/hotel.js';
 
-console.log(Hotel)
-
-console.log('This is the JavaScript entry file - your code begins here.');
 
 let usersPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users').then(response => response.json());
 let roomsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms').then(response => response.json());
@@ -24,21 +21,54 @@ var data = {};
 let hotel;
 
 
-$( window ).on( "load", function() {
-  Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
-    data = {
-      usersData: response[0],
-      roomsData: response[1],
-      bookingsData: response[2]
-    }
-  }).then(() => { 
-    createNewHotel(data.usersData, data.roomsData, data.bookingsData)
-  });
-})
+Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
+  data = {
+    usersData: response[0],
+    roomsData: response[1],
+    bookingsData: response[2]
+  }
+}).then(() => { 
+  createNewHotel(data.usersData, data.roomsData, data.bookingsData)
+});
 
 function createNewHotel(users, rooms, bookings) {
   hotel = new Hotel(users, rooms, bookings);
-  console.log(hotel)
+}
+
+$('.submit-button').on('click', function() {
+  validateForm()
+})
+  
+// function validateForm() {
+//   const userName = $('.user-name');
+//   const password = $('.password');
+//   const validPassword = 'overlook2020';
+//   const regex = /^customer([1-9] | [1-4] [0-9] | 50)$/;
+//   if (regex.test(userName.val()) && password.val() === validPassword) {
+//     const customerId = parseInt(userName.val()).replace( /^\D+/g,'');
+//     console.log('hello')
+
+//   } else if (userName.val() === 'manager' && password.val() === validPassword) {
+//     console.log('yo yo')
+//   }
+// }
+
+function validateForm() {
+  const userName = $('.user-name').val();
+  const password = $('.password').val();
+  const regex = /^customer([1-9]|[1-4][0-9]|50)$/;
+  const validPassword = 'overlook2020';
+
+  if (regex.test(userName) && password === validPassword) {
+    const userID = parseInt(userName.replace( /^\D+/g, ''))
+    console.log(userID);
+
+  } else if (userName === 'manager' && password === validPassword) {
+    console.log(0);
+
+  } else {
+    console.log('hey')
+  }
 }
 
 
