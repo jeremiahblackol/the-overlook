@@ -32,14 +32,14 @@ $( window ).on( "load", function() {
       bookingsData: response[2]
     }
   }).then(() => { 
-    hotel = new Hotel(data.usersData, data.roomsData, data.bookingsData);
-    this.console.log(hotel)
+    createNewHotel(data.usersData, data.roomsData, data.bookingsData)
   });
 })
 
-// function createNewHotel(users, rooms, bookings) {
-//   hotel = new Hotel(users, rooms, bookings)
-// }
+function createNewHotel(users, rooms, bookings) {
+  hotel = new Hotel(users, rooms, bookings);
+  console.log(hotel)
+}
 
 
 
