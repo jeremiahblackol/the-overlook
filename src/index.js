@@ -11,6 +11,7 @@ import './css/base.scss';
 import './images/turing-logo.png';
 
 import Hotel from '../src/hotel.js';
+import Customer from '../src/customer.js';
 
 
 let usersPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users').then(response => response.json());
@@ -60,11 +61,14 @@ function validateForm() {
   const validPassword = 'overlook2020';
 
   if (regex.test(userName) && password === validPassword) {
-    const userID = parseInt(userName.replace( /^\D+/g, ''))
-    console.log(userID);
+    const userID = parseInt(userName.replace( /^\D+/g, ''));
+    //this is where i'm going to have to link the users class
+    //instantiating each user
+    //call the method
+    console.log(hotel.customerList);
 
   } else if (userName === 'manager' && password === validPassword) {
-    console.log(0);
+    console.log(hotel);
 
   } else {
     console.log('hey')

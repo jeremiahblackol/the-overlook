@@ -9,6 +9,12 @@ class Hotel {
     this.customerList = customerList;
     this.currentCustomer = '';
   }
+
+  returnCurrentCustomer() {
+    // finds customer 
+    // then uses user's class to instantiantiate customer
+    // then assigns the value of this.currentCustomer
+  }
 }
 
 export default Hotel;
