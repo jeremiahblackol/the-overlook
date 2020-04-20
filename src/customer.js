@@ -3,9 +3,25 @@ import Manager from "./manager";
 import Hotel from "./hotel";
 
 class Customer {
-    constructor() {
-        
-    }
+  constructor(id, allBookings) {
+    this.id = id;
+    this.allBookings = allBookings;
+    this.pastBookings = [];
+    this.futureBookings = [];
+    this.amountPaid; 
+  }
+
+  returnPastBookings() {
+
+  }
+
+  returnFutureBookings() {
+
+  }
+
+  returnAmountPaid() {
+    
+  }
 }
 
 export default Customer;

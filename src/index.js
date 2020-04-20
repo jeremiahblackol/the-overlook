@@ -11,10 +11,8 @@ import './css/base.scss';
 import './images/turing-logo.png';
 
 import Hotel from '../src/hotel.js';
+import Customer from '../src/customer.js';
 
-console.log(Hotel)
-
-console.log('This is the JavaScript entry file - your code begins here.');
 
 let usersPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users').then(response => response.json());
 let roomsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms').then(response => response.json());
@@ -24,21 +22,51 @@ var data = {};
 let hotel;
 
 
-$( window ).on( "load", function() {
-  Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
-    data = {
-      usersData: response[0],
-      roomsData: response[1],
-      bookingsData: response[2]
-    }
-  }).then(() => { 
-    createNewHotel(data.usersData, data.roomsData, data.bookingsData)
-  });
-})
+Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
+  data = {
+    usersData: response[0],
+    roomsData: response[1],
+    bookingsData: response[2]
+  }
+}).then(() => { 
+  createNewHotel(data.usersData, data.roomsData, data.bookingsData)
+});
 
 function createNewHotel(users, rooms, bookings) {
   hotel = new Hotel(users, rooms, bookings);
-  console.log(hotel)
+}
+
+$('.submit-button').on('click', function() {
+  validateForm()
+})
+  
+function validateForm() {
+  const userName = $('.user-name').val();
+  const password = $('.password').val();
+  const regex = /^customer([1-9]|[1-4][0-9]|50)$/;
+  const validPassword = 'overlook2020';
+
+  if (regex.test(userName) && password === validPassword) {
+    const userID = parseInt(userName.replace( /^\D+/g, ''));
+    hotel.currentCustomer = new Customer(userID, hotel.returnCustomerBookings(userID));
+    createCustomerDashboard(hotel.returnCurrentCustomer(userID)[0].name);
+    //this is where i'm going to have to link the users class
+    //instantiating each user
+    //call the method
+    console.log(hotel.bookedRooms.bookings)
+    console.log(hotel.currentCustomer)
+
+  } else if (userName === 'manager' && password === validPassword) {
+    //all methods that have hotel data could 
+    console.log(hotel);
+
+  } else {
+    console.log('hey')
+  }
+}
+
+function createCustomerDashboard(userName) {
+    $( 'body' ).html(`<p>Welcome ${userName}!</p>`)
 }
 
 
