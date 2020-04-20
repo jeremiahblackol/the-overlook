@@ -40,20 +40,6 @@ $('.submit-button').on('click', function() {
   validateForm()
 })
   
-// function validateForm() {
-//   const userName = $('.user-name');
-//   const password = $('.password');
-//   const validPassword = 'overlook2020';
-//   const regex = /^customer([1-9] | [1-4] [0-9] | 50)$/;
-//   if (regex.test(userName.val()) && password.val() === validPassword) {
-//     const customerId = parseInt(userName.val()).replace( /^\D+/g,'');
-//     console.log('hello')
-
-//   } else if (userName.val() === 'manager' && password.val() === validPassword) {
-//     console.log('yo yo')
-//   }
-// }
-
 function validateForm() {
   const userName = $('.user-name').val();
   const password = $('.password').val();
@@ -62,17 +48,25 @@ function validateForm() {
 
   if (regex.test(userName) && password === validPassword) {
     const userID = parseInt(userName.replace( /^\D+/g, ''));
+    hotel.currentCustomer = new Customer(userID, hotel.returnCustomerBookings(userID));
+    createCustomerDashboard(hotel.returnCurrentCustomer(userID)[0].name);
     //this is where i'm going to have to link the users class
     //instantiating each user
     //call the method
-    console.log(hotel.customerList);
+    console.log(hotel.bookedRooms.bookings)
+    console.log(hotel.currentCustomer)
 
   } else if (userName === 'manager' && password === validPassword) {
+    //all methods that have hotel data could 
     console.log(hotel);
 
   } else {
     console.log('hey')
   }
+}
+
+function createCustomerDashboard(userName) {
+    $( 'body' ).html(`<p>Welcome ${userName}!</p>`)
 }
 
 
