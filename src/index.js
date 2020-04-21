@@ -56,13 +56,14 @@ function validateForm() {
     currentCustomer = new Customer(userID, customerName, customerBookings);
     createCustomerDashboard(customerName);
     displayCustomerBookings(currentCustomer);
-    //this is where i'm going to have to link the users class
-    //instantiating each user
-    //call the method
+    /*
+    This is probably where I should be looking to create my domUpdates class
+    Probably create a function that does all of these things
+    The customer dashboard has no styling -- need to style cards for customer
+    Already have access to all relevant information, just need to display it
+    Are there images for every room?
+    */
     console.log(displayCustomerTotalSpent(currentCustomer))
-    console.log(hotel.allRooms)
-    // console.log(customerBookings)
-    console.log(currentCustomer)
 
   } else if (userName === 'manager' && password === validPassword) {
     //all methods that have hotel data could 
@@ -91,7 +92,6 @@ function displayCustomerTotalSpent(customer) {
 }
 
 
-// // !!!!!!!! Dont forget you're returning the rooms that are associated with the bookings
 
 
 
