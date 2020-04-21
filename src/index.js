@@ -59,7 +59,7 @@ function validateForm() {
     //this is where i'm going to have to link the users class
     //instantiating each user
     //call the method
-    console.log(hotel.returnCustomerRooms(currentCustomer))
+    console.log(displayCustomerTotalSpent(currentCustomer))
     console.log(hotel.allRooms)
     // console.log(customerBookings)
     console.log(currentCustomer)
@@ -81,6 +81,13 @@ function displayCustomerBookings(customer) {
   hotel.returnCustomerRooms(customer).forEach((room) => {
     $( 'body' ).append(`<div><p>${room.number}</p><p>${room.roomType}</p></div>`)
   })
+}
+
+function displayCustomerTotalSpent(customer) {
+  return hotel.returnCustomerRooms(customer).reduce((acc, room) => {
+    acc += room.costPerNight
+    return acc
+  }, 0)
 }
 
 
