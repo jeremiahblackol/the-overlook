@@ -1,6 +1,6 @@
-import Room from "./room";
-import Customer from "./customer";
-import Hotel from "./hotel";
+import Room from "./Room";
+import Customer from "./Customer";
+import Hotel from "./Hotel";
 
 class Manager {
   constructor() {
