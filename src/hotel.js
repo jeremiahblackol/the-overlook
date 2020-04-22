@@ -12,9 +12,6 @@ class Hotel {
 
   returnCurrentCustomer(customerID) {
     return this.customerList.users.filter((customer) => customerID === customer.id)
-    // finds customer 
-    // then uses user's class to instantiantiate customer
-    // then assigns the value of this.currentCustomer
   }
 
   returnCustomerRooms(customer) {
