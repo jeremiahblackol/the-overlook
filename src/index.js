@@ -10,10 +10,13 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png';
 
+const moment = require('moment');
+
 
 import Hotel from '../src/Hotel.js';
 import Customer from '../src/Customer.js';
 import DataRepo from './DataRepo'
+import Manager from './Manager';
 
 
 let usersPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users').then(response => response.json());
@@ -23,6 +26,8 @@ let bookingsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/
 var data = {};
 let hotel;
 let currentCustomer;
+let manager;
+let time = `"${moment().format('L')}"`;
 
 
 Promise.all([usersPromise, roomsPromise, bookingsPromise]).then(response => {
@@ -66,8 +71,14 @@ function validateForm() {
     console.log(displayCustomerTotalSpent(currentCustomer))
 
   } else if (userName === 'manager' && password === validPassword) {
-    //all methods that have hotel data could 
-    console.log(hotel);
+    manager = new Manager()
+    //should be able to see total rooms available for current date
+    //should see total revenue for date
+    //percentage of rooms occupied
+    console.log(manager.returnBookedRoomsForGivenDate(hotel, '2020/01/24'))
+    console.log(hotel.bookedRooms.bookings[0].date);
+    console.log(time)
+    //HOW DOES MOMENT WORK?
 
   } else {
     console.log('hey')

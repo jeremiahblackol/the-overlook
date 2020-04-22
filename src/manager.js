@@ -17,9 +17,14 @@ class Manager {
     //for the test i want this to return the sum total of all money made today
     //return the amount of all bookings for the day
   }
+
+  returnBookedRoomsForGivenDate(hotel, date) {
+    return hotel.bookedRooms.bookings.filter((booking) => booking.date == date)
+  }
   
   returnAvailableRooms(/*date*/) {
     //goes to hotel and returns available rooms for a given day
+
   }
 
   findPercentageOfVacantRooms() {
