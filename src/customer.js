@@ -12,8 +12,8 @@ class Customer {
     this.amountPaid = 0; 
   }
 
-  returnPastBookings() {
-
+  returnPastBookings(date) {
+    
   }
 
   returnFutureBookings() {
